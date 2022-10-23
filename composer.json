@@ -9,7 +9,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Logan",
+            "name": "logan-song",
             "email": "jongno@kakao.com"
         }
     ],
@@ -28,7 +28,8 @@
                 "LoganSong\\LaravelMultiDatabase\\ServiceProvider"
             ],
             "aliases": {
-                "LogEx": "LoganSong\\LaravelMultiDatabase\\LaravelMultiDatabase"
+                "DB": "LoganSong\\LaravelMultiDatabase\\DB",
+                "Model": "LoganSong\\LaravelMultiDatabase\\Model"
             }
         }
     }
