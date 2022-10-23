@@ -1,0 +1,35 @@
+{
+    "name": "song/laravel-multi-database",
+    "description": "laravel multi databasupporter",
+    "keywords": [
+        "database",
+        "multi"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Logan",
+            "email": "jongno@kakao.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "laravel/framework": "^8.0|^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "LoganSong\\LaravelMultiDatabase\\": "src/"
+        },
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LoganSong\\LaravelMultiDatabase\\ServiceProvider"
+            ],
+            "aliases": {
+                "LogEx": "LoganSong\\LaravelMultiDatabase\\LaravelMultiDatabase"
+            }
+        }
+    }
+}
