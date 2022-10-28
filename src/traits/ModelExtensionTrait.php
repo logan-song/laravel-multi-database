@@ -18,12 +18,18 @@ trait ModelExtensionTrait
     return $obj->getConnection()->getName().'.'.$table;
   }
 
-  public function getTableColumns()
+  public function getTableColumns(bool $_hidden = false)
   {
     $databaseTable = explode('.', $this->getTable());
     $table = last($databaseTable);
 
-    return $this->getConnection()->getSchemaBuilder()->getColumnListing($table);
+    $getColumns = $this->getConnection()->getSchemaBuilder()->getColumnListing($table);
+
+    if ($_hidden) {
+      $getColumns = array_diff($getColumns, $this->getHidden());
+    }
+
+    return $getColumns;
   }
 
   public function scopeExclude($query, $columns)
