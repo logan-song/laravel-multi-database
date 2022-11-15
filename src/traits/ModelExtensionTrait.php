@@ -74,7 +74,7 @@ trait ModelExtensionTrait
       ->whereNotNull($column);
   }
 
-  public function scopeUpdateOrCreateEx($query, $_conditions, $_data): ?int
+  public function scopeUpdateOrCreateEx($query, $_conditions, $_data)
   {
     $tableName = last(explode('.', $this->getTable()));
 
