@@ -3,9 +3,9 @@
 namespace LoganSong\LaravelMultiDatabase\traits;
 
 use Closure;
+use Illuminate\Support\Facades\Schema;
 use ReflectionFunction;
 use ReflectionClass;
-use SplFileObject;
 use Str;
 
 trait ModelExtensionTrait
@@ -23,12 +23,16 @@ trait ModelExtensionTrait
     $databaseTable = explode('.', $this->getTable());
     $table = last($databaseTable);
 
+    // table exists check
+    if (!Schema::connection($this->getConnectionName())->hasTable($table)) {
+      throw new \Exception('table or view not exists. ['.$table.']');
+    }
+
     $getColumns = $this->getConnection()->getSchemaBuilder()->getColumnListing($table);
 
     if ($_hidden) {
       $getColumns = array_diff($getColumns, $this->getHidden());
     }
-
     return $getColumns;
   }
 
