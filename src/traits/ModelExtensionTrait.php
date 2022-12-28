@@ -78,7 +78,7 @@ trait ModelExtensionTrait
       ->whereNotNull($column);
   }
 
-  public function scopeUpdateOrCreateEx($query, $_conditions, $_data) : string|int|null
+  public function scopeUpdateOrCreateEx($query, $_conditions, $_data, $_quietly = false) : string|int|null
   {
     $tableName = last(explode('.', $this->getTable()));
 
@@ -101,7 +101,13 @@ trait ModelExtensionTrait
       foreach (array_merge($_conditions, $_data) as $key => $val) {
         $model->{$key} = $val;
       }
-      $model->save();
+
+      if ($_quietly) {
+        $model->saveQuietly();
+      } else {
+        $model->save();
+      }
+      
       $id = $model->id;
       if (function_exists('__setSchedulerLog')) {
         __setSchedulerLog($tableName, 'scheduler', $type, 'return:' . $id, false);
