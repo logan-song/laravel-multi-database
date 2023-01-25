@@ -107,7 +107,7 @@ trait ModelExtensionTrait
       } else {
         $model->save();
       }
-      
+
       $id = $model->id;
       if (function_exists('__setSchedulerLog')) {
         __setSchedulerLog($tableName, 'scheduler', $type, 'return:' . $id, false);
@@ -119,7 +119,7 @@ trait ModelExtensionTrait
       throw $th;
     }
 
-    return $id;
+    return [$id, $type];
   }
 
   public function injectClosure(Closure $closure, $injectCode)
