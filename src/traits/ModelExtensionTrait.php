@@ -78,7 +78,7 @@ trait ModelExtensionTrait
       ->whereNotNull($column);
   }
 
-  public function scopeUpdateOrCreateEx($query, $_conditions, $_data, $_quietly = false): array|null
+  public function scopeUpdateOrCreateEx($query, $_conditions, $_data, $_quietly = false, $_logging = true): array|null
   {
     $tableName = last(explode('.', $this->getTable()));
 
@@ -109,7 +109,7 @@ trait ModelExtensionTrait
       }
 
       $id = $model->id;
-      if (function_exists('__setSchedulerLog')) {
+      if (function_exists('__setSchedulerLog') && $_logging) {
         __setSchedulerLog($tableName, 'scheduler', $type, 'return:' . $id, false);
       }
     } catch (\Throwable $th) {
